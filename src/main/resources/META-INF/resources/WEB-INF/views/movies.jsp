@@ -56,7 +56,7 @@
         </table>
 
         <br><br>
-        <form action="add">
+        <form action="management/add">
             <input type="submit" value="Add new Movie" />
         </form>
     </body>

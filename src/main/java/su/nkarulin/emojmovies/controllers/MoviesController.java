@@ -19,12 +19,12 @@ public class MoviesController {
     @Autowired
     MovieRepository movieRepository;
 
-    @GetMapping("/add")
+    @GetMapping("/management/add")
     public String addMoviePage() {
         return "uploadMoview";
     }
 
-    @PostMapping("/")
+    @PostMapping("/management")
     public String addMovie(@RequestParam("title") String title,
                            @RequestParam("year") int year,
                            @RequestParam("imageFile") MultipartFile imageFile) {
@@ -37,7 +37,7 @@ public class MoviesController {
 
         movieRepository.save(movie);
 
-        return "redirect:";
+        return "redirect:/movies/";
     }
 
     @GetMapping("/")
