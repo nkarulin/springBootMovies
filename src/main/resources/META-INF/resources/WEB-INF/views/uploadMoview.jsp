@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Log In</title>
+        <title>Upload new moview</title>
     </head>
     <body>
         <form action="/movies/management/" method="post" enctype="multipart/form-data">
