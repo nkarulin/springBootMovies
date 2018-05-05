@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import su.nkarulin.emojmovies.domain.user.UserRole;
 
 @Configuration
 @EnableWebSecurity
@@ -19,6 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
             .authorizeRequests()
                 .antMatchers("/movies/management/**").authenticated()
+                .antMatchers("/movies/delete/**").hasRole(UserRole.ADMIN.name())
                 .anyRequest().permitAll()
                 .and()
             .formLogin()

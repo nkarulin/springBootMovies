@@ -1,4 +1,4 @@
-package su.nkarulin.emojmovies.domain;
+package su.nkarulin.emojmovies.domain.user;
 
 import lombok.Data;
 
@@ -16,4 +16,6 @@ public class EmojMoviesUser {
 
     @NotNull
     private String password;
+
+    private UserRole role;
 }

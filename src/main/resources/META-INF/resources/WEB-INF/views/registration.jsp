@@ -14,11 +14,16 @@
                     <td><form:input path="login"/></td>
                 </tr>
                 <tr>
+                    Role:
+                    <form:radiobutton path="role" value="USER"/>User
+                    <form:radiobutton path="role" value="ADMIN"/>Admin
+                </tr>
+                <tr>
                     <td><form:label path="password">Password</form:label></td>
                     <td><form:input type="password" path="password"/></td>
                 </tr>
                 <tr>
-                    <td><input type="submit" value="Submit"/></td>
+                    <td><input type="submit" value="Register"/></td>
                 </tr>
             </table>
         </form:form>

@@ -2,6 +2,11 @@
 <head></head>
 <body>
    <h1>Login</h1>
+
+   <c:if test="${param.error != null}">
+        <h2><font color="red">Bad credentials!</font></h2>
+   </c:if>
+
    <h2><font color="red">${errorMessage}</font></h2>
    <h2><font color="blue">${infoMessage}</font></h2>
    <form name='f' action="/user/login" method='POST'>

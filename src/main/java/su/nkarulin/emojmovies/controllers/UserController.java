@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import su.nkarulin.emojmovies.domain.EmojMoviesUser;
+import su.nkarulin.emojmovies.domain.user.EmojMoviesUser;
+import su.nkarulin.emojmovies.domain.user.UserRole;
 import su.nkarulin.emojmovies.repositories.EmojMoviesUserRepository;
 
 @Controller
@@ -22,7 +23,7 @@ public class UserController {
     @GetMapping("/registration")
     String registrationPage(Model model) {
         EmojMoviesUser user = new EmojMoviesUser();
-        user.setLogin("User123455");
+        user.setRole(UserRole.USER);
         model.addAttribute("user", user);
         return "registration";
     }
