@@ -6,8 +6,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import su.nkarulin.emojmovies.domain.Movie;
+import su.nkarulin.emojmovies.domain.MovieComment;
+import su.nkarulin.emojmovies.repositories.MovieCommentsRepository;
 import su.nkarulin.emojmovies.repositories.MovieRepository;
 import su.nkarulin.emojmovies.services.ImagesStorageService;
+
+import java.security.Principal;
 
 @Controller
 @RequestMapping("/movies")
@@ -18,6 +22,9 @@ public class MoviesController {
 
     @Autowired
     MovieRepository movieRepository;
+
+    @Autowired
+    MovieCommentsRepository movieCommentsRepository;
 
     @GetMapping("/management/add")
     public String addMoviePage() {
@@ -52,6 +59,27 @@ public class MoviesController {
                             Model model) {
         model.addAttribute("movie", movieRepository.findById(id).get());
         return "moviePage";
+    }
+
+    @PostMapping("/{id}/comment")
+    public String addNewComment(@PathVariable long id,
+                                Principal principal,
+                                @ModelAttribute("commentText") String commentText, Model model) {
+        MovieComment movieComment = new MovieComment();
+        movieComment.setText(commentText);
+        movieComment.setAuthor(principal == null ? "Anon" : principal.getName());
+
+        Movie movie = movieRepository.findById(id).get();
+        
+        movieComment.setMovie(movie);
+        movieComment = movieCommentsRepository.save(movieComment);
+
+        movie.getComments().add(movieComment);
+        movieRepository.save(movie);
+
+        model.addAttribute("movie", movieRepository.findById(id).get());
+        
+        return "redirect:/movies/" + id;
     }
 
     @GetMapping("/delete/{id}")

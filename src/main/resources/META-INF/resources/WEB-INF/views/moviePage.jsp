@@ -12,15 +12,6 @@
             overflow: hidden;
             background-size: cover
         }
-    	table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            margin: 0 auto;
-        }
-        td {
-            text-align: center;
-            padding: 4px;
-        }
 
     </style>
     <head>
@@ -38,5 +29,19 @@
         <sec:authorize access="hasAnyRole('ADMIN')">
             <a href="/movies/delete/${movie.id}">DELETE THE MOVIE ${movie.title}</a>
         </sec:authorize>
+
+        <br>
+        <table>
+            <c:forEach items="${movie.comments}" var="comment" varStatus="count">
+            <tr><td>
+                <c:out value="${comment.author}: ${comment.text}"/>
+            </td></tr>
+            </c:forEach>
+        </table>
+        <br>
+        <textarea name="commentText" form="commentform">Enter your comment here...</textarea>
+        <form action="/movies/${movie.id}/comment/" method="post" id="commentform">
+            <input type="submit" value="Comment" />
+        </form>
     </body>
 </html>
